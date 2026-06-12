@@ -23,21 +23,22 @@ class ZiraphBeta < Formula
   url "https://ziraph.com/downloads/beta/ziraph-beta-latest-macos-arm64.tar.gz"
   # Bump this version on every beta release.
   # Source of truth: https://ziraph.com/downloads/beta/manifest.json
-  version "v0.1.0-beta.20260612090302"
+  version "v0.1.0-beta.20260612123201"
   # Bump this sha256 on every beta release.
   # Filled at first-beta-cut from:
   #   https://ziraph.com/downloads/beta/ziraph-beta-latest-macos-arm64.tar.gz.sha256
-  sha256 "9980807965579a2f715d8a2da390b3de8ab833f2fd93e071137fbf75c41dc48e"
+  sha256 "684a4d52569a89a11620089dd838647560ad01ac5ff621a46741505fa10c0360"
 
   def install
     # The tarball contains a binary named "ziraph"; rename it on install so
     # both channels can coexist on PATH without conflict.
     bin.install "ziraph" => "ziraph-beta"
-    # NOTE: install-time completion generation is intentionally omitted — the beta
-    # license gate blocks `ziraph-beta completions` (every verb except `license
-    # install`), so generate_completions_from_executable would exit 1 and fail the
-    # install. Re-add once the gate exempts completions/--version/--help; until
-    # then, run `ziraph-beta completions zsh|bash` manually after installing a key.
+    # Generate completion scripts from the installed binary. argv[0] is
+    # "ziraph-beta" here, so the scripts use the right command name + identifiers
+    # (_ziraph_beta). Requires the binary to exempt `completions` from the beta
+    # license gate (#1342) — without that this exits 1 and fails the install,
+    # which is exactly what broke the first beta cut.
+    generate_completions_from_executable(bin/"ziraph-beta", "completions", shells: [:bash, :zsh])
   end
 
   test do
