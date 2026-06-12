@@ -29,9 +29,6 @@ class ZiraphBeta < Formula
   #   https://ziraph.com/downloads/beta/ziraph-beta-latest-macos-arm64.tar.gz.sha256
   sha256 "9980807965579a2f715d8a2da390b3de8ab833f2fd93e071137fbf75c41dc48e"
 
-  # Ziraph is macOS + Apple Silicon only; no Intel or Linux support.
-  bottle :unneeded
-
   def install
     # The tarball contains a binary named "ziraph"; rename it on install so
     # both channels can coexist on PATH without conflict.
