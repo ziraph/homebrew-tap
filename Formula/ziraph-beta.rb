@@ -33,10 +33,11 @@ class ZiraphBeta < Formula
     # The tarball contains a binary named "ziraph"; rename it on install so
     # both channels can coexist on PATH without conflict.
     bin.install "ziraph" => "ziraph-beta"
-    # Generate completion scripts using the installed binary.  argv[0] is
-    # "ziraph-beta" at this point, so the scripts use the correct command name
-    # and function identifiers (_ziraph_beta, not _ziraph).
-    generate_completions_from_executable(bin/"ziraph-beta", "completions", shells: [:bash, :zsh])
+    # NOTE: install-time completion generation is intentionally omitted — the beta
+    # license gate blocks `ziraph-beta completions` (every verb except `license
+    # install`), so generate_completions_from_executable would exit 1 and fail the
+    # install. Re-add once the gate exempts completions/--version/--help; until
+    # then, run `ziraph-beta completions zsh|bash` manually after installing a key.
   end
 
   test do
