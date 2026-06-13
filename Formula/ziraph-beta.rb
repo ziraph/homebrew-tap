@@ -23,11 +23,11 @@ class ZiraphBeta < Formula
   url "https://ziraph.com/downloads/beta/ziraph-beta-latest-macos-arm64.tar.gz"
   # Bump this version on every beta release.
   # Source of truth: https://ziraph.com/downloads/beta/manifest.json
-  version "v0.1.0-beta.20260612123201"
+  version "v0.1.0-beta.20260613045645"
   # Bump this sha256 on every beta release.
   # Filled at first-beta-cut from:
   #   https://ziraph.com/downloads/beta/ziraph-beta-latest-macos-arm64.tar.gz.sha256
-  sha256 "684a4d52569a89a11620089dd838647560ad01ac5ff621a46741505fa10c0360"
+  sha256 "5b10a31087bc76ae7a873b99ffb934c7224e4e07bfdec418d943d129844e53ec"
 
   def install
     # The tarball contains a binary named "ziraph"; rename it on install so
